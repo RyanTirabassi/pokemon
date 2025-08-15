@@ -1,61 +1,53 @@
 import React from "react";
-import { capitalize } from "../utils/format";
 
+export default function PokedexCard({ id, name, image, types, height, weight }) {
+  return (
+    <div className="pokedexDevice" aria-label={`Pokédex mostrando ${name}`}>
+      {/* Topo com luzes */}
+      <div className="topBar">
+        <span className="lens" aria-hidden="true" />
+        <span className="dot red" aria-hidden="true" />
+        <span className="dot yellow" aria-hidden="true" />
+        <span className="dot green" aria-hidden="true" />
+      </div>
 
-export function PokedexCard({ id, name, image, types, height, weight, abilities, stats }) {
-return (
-<section className="pokedex" aria-live="polite">
-<div className="device">
-<div className="screen">
-{image ? (
-<img src={image} alt={`Imagem oficial de ${name}`} />
-) : (
-<div className="placeholder" aria-hidden="true" />
-)}
-</div>
+      {/* Área da tela */}
+      <div className="screenWrap">
+        <div className="screen">
+          {image ? (
+            <img src={image} alt={`Imagem oficial de ${name}`} />
+          ) : (
+            <div className="screenPlaceholder" />
+          )}
+        </div>
+        <div className="speaker" aria-hidden="true" />
+      </div>
 
+      {/* Linha de botões coloridos (decorativo) */}
+      <div className="colorBtns" aria-hidden="true">
+        <span className="btn flat yellow" />
+        <span className="btn flat blue" />
+      </div>
 
-<div className="info">
-<h2>{name} <span className="id">#{id}</span></h2>
+      {/* Painel verde de informações */}
+      <div className="infoPanel">
+        <h2 className="pokeName">{name} <span className="pokeId">#{id}</span></h2>
+        <dl>
+          <div><dt>Type:</dt><dd>{types.join(", ")}</dd></div>
+          <div><dt>Height:</dt><dd>{height}</dd></div>
+          <div><dt>Weight:</dt><dd>{weight}</dd></div>
+          <div><dt>Id:</dt><dd>#{id}</dd></div>
+        </dl>
+      </div>
 
-
-<div className="types">
-{types.map((t) => (
-<span key={t} className={`badge type-${t}`}>{capitalize(t)}</span>
-))}
-</div>
-
-
-<dl className="metrics">
-<div><dt>Altura</dt><dd>{height}</dd></div>
-<div><dt>Peso</dt><dd>{weight}</dd></div>
-</dl>
-
-
-<div className="abilities">
-<h3>Habilidades</h3>
-<ul>
-{abilities.map((a) => (
-<li key={a}>{capitalize(a)}</li>
-))}
-</ul>
-</div>
-
-
-<div className="stats">
-<h3>Atributos base</h3>
-<ul>
-{stats?.map((s) => (
-<li key={s.stat.name}>
-<span className="label">{capitalize(s.stat.name)}</span>
-<progress value={s.base_stat} max="200" aria-valuemin="0" aria-valuemax="200" aria-valuenow={s.base_stat} />
-<span className="value">{s.base_stat}</span>
-</li>
-))}
-</ul>
-</div>
-</div>
-</div>
-</section>
-);
+      {/* D-pad e botão redondo (decorativos) */}
+      <div className="controls" aria-hidden="true">
+        <span className="roundBtn" />
+        <div className="dpad">
+          <span className="v" />
+          <span className="h" />
+        </div>
+      </div>
+    </div>
+  );
 }
