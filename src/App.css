@@ -218,3 +218,137 @@
 }
 .dpad .v { width: 28px; height: 100%; }
 .dpad .h { height: 28px; width: 100%; }
+
+
+
+
+
+
+
+
+
+/* ===== (0) Fundo branco global ===== */
+html, body {
+  background: #fff;
+  color: #111;
+}
+
+/* ===== (1) Tela da IMAGEM: borda mais grossa + botões internos ===== */
+/* Aumenta a borda/bezel e adiciona botões (círculos) dentro do aro */
+.screenWrap {
+  position: relative;                  /* preciso p/ os pseudo-elementos */
+  background: #d0d6e1;                 /* cinza mais claro, visual de bezel */
+  border: 4px solid #9aa3b0;           /* borda mais grossa */
+  padding: 18px;                        /* bezel mais largo */
+  border-radius: 14px;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.55),
+    inset 0 -3px 0 rgba(0,0,0,.12);
+}
+
+/* botõezinhos dentro do bezel (3 círculos no canto superior direito) */
+.screenWrap::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #9aa3b0;
+  box-shadow:
+    -16px 0 0 #9aa3b0,
+    -32px 0 0 #9aa3b0; /* cria 3 bolinhas com shadow */
+}
+
+/* Tela branca com borda mais visível */
+.screen {
+  background: #fff;
+  border-radius: 10px;
+  border: 3px solid #9aa3b0;          /* borda da tela mais marcada */
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+
+/* A imagem ocupa um pouco mais da tela agora */
+.screen img {
+  width: 86%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ===== (2) Telinha verde de informações: menor e central ===== */
+.infoPanel {
+  width: 280px;                        /* deixa a telinha "menor" */
+  max-width: 90%;
+  margin: 14px auto 12px;              /* centraliza */
+  text-align: left;                    /* rótulos à esquerda, como na referência */
+  background: #2e7d32;
+  border: 3px solid #1b5e20;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #eaf5ea;
+}
+
+.pokeName {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.pokeId { color: #ffee58; }
+
+.infoPanel dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 10px;
+  margin: 0;
+}
+
+/* ===== (3) Botões decorativos (amarelo e azul) centralizados logo abaixo da tela ===== */
+.colorBtns {
+  display: flex;
+  justify-content: center;             /* centraliza a fileira */
+  gap: 12px;
+  margin: 10px 0;
+}
+
+.btn.flat {
+  height: 12px;
+  width: 90px;                         /* um pouco mais largos, como na imagem */
+  border-radius: 6px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25);
+}
+
+/* ===== (4) Controles inferiores: mantêm posição/espaço como na imagem ===== */
+.controls {
+  margin-top: 12px;                    /* pequeno ajuste de respiro */
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  gap: 16px;
+  align-items: center;
+}
+
+/* (decorativos, já existiam) */
+.roundBtn {
+  justify-self: start;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: radial-gradient(circle, #4e545e, #1e222a);
+  box-shadow: inset 0 6px 10px rgba(255,255,255,.1),
+              inset 0 -10px 16px rgba(0,0,0,.35);
+}
+.dpad {
+  justify-self: end;
+  position: relative;
+  width: 84px; height: 84px;
+}
+.dpad .v, .dpad .h {
+  position: absolute; inset: 0;
+  margin: auto; background: #20242b; border-radius: 10px;
+  box-shadow: inset 0 8px 14px rgba(255,255,255,.06),
+              inset 0 -10px 18px rgba(0,0,0,.45);
+}
+.dpad .v { width: 28px; height: 100%; }
+.dpad .h { height: 28px; width: 100%; }
