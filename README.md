@@ -11,4 +11,4 @@ Uma Pokédex digital desenvolvida para listar, visualizar e buscar informações
 
 - HTML5 / CSS3 / JavaScript
 - [PokéAPI](https://pokeapi.co/) - API pública de dados dos Pokémon
->>>>>>> a906c4c82e9e457925cc3bcd00df80a09f5c69f6
+
