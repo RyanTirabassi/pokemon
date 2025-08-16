@@ -2,8 +2,8 @@ import React from "react";
 
 export default function SearchBar({ value, onChange, onSearch }) {
   const onSubmit = (e) => {
-    e.preventDefault();
-    onSearch(value);            
+    e.preventDefault(); // evita recarregar a página
+    onSearch(value);
   };
 
   return (

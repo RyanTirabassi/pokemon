@@ -1,7 +1,16 @@
 import React from "react";
 import "./PokedexCard.css";
 
-export default function PokedexCard({ id, name, image, types, height, weight }) {
+export default function PokedexCard({
+  id,
+  name,
+  image,
+  types = [],
+  height,
+  weight,
+  loading = false,
+  error = "",
+}) {
   return (
     <div className="pokedexDevice" aria-label={`Pokédex mostrando ${name}`}>
       {/* Topo com luzes */}
@@ -12,7 +21,7 @@ export default function PokedexCard({ id, name, image, types, height, weight }) 
         <span className="dot green" />
       </div>
 
-      {/* Tela (bezel grosso + “parafusos”/bolinhas e grelha) */}
+      {/* Tela (bezel + tela interna) */}
       <div className="screenWrap">
         <div className="screen">
           {image ? (
@@ -21,24 +30,27 @@ export default function PokedexCard({ id, name, image, types, height, weight }) 
             <div className="screenPlaceholder" />
           )}
         </div>
+
+        {/* "parafusos" / bolinhas centrais da moldura (decorativo) */}
         <div className="screenDots" aria-hidden="true">
           <span />
           <span />
         </div>
+
         <div className="speaker" aria-hidden="true" />
       </div>
 
-      {/* Botões coloridos */}
+      {/* Botões decorativos */}
       <div className="colorBtns" aria-hidden="true">
         <span className="btn flat yellow" />
         <span className="btn flat blue" />
       </div>
 
-      {/* Linha de baixo: analógico + TELINHA VERDE + D-pad */}
+      {/* Bottom row contendo: analógico | infoPanel | dpad */}
       <div className="bottomRow">
         <span className="analogBtn" aria-hidden="true" />
 
-        <div className="infoPanel">
+        <div className="infoPanel" role="region" aria-label="Informações do Pokémon">
           <h2 className="pokeName">
             {name} <span className="pokeId">#{id}</span>
           </h2>
@@ -55,6 +67,13 @@ export default function PokedexCard({ id, name, image, types, height, weight }) 
           <span className="h" />
         </div>
       </div>
+
+      {/* Overlay de carregando/erro para evitar "sumir" a Pokédex */}
+      {(loading || error) && (
+        <div className={`cardOverlay ${error ? "isError" : ""}`} aria-live="polite">
+          {error ? error : "Buscando…"}
+        </div>
+      )}
     </div>
   );
 }

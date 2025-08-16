@@ -71,114 +71,21 @@
 }
 
 /* ===== Botões coloridos (abaixo da tela) ===== */
-.colorBtns{ display:flex; gap:12px; margin:4px 0 2px; }
+.colorBtns{ display:flex; gap:12px; margin:4px 0 2px; justify-content:center; }
 .btn.flat{ display:inline-block; height:12px; width:90px; border-radius:6px; box-shadow:inset 0 -2px 0 rgba(0,0,0,.25); }
 .btn.yellow{ background:#ffd54f; } .btn.blue{ background:#64b5f6; }
 
-/* ===== Telinha VERDE de informações – estilo da imagem da direita ===== */
-.infoPanel{
-  width:280px; max-width:90%;
-  margin:10px auto 8px;              /* centralizada e menor */
-  padding:12px 14px;
-  background:#a3d977;                 /* verde claro */
-  color:#111;                         /* texto preto */
-  border:3px solid #cfd0d2;           /* borda cinza */
-  border-radius:6px;
-  box-shadow: inset 3px 3px 6px rgba(0,0,0,.18),
-              inset -3px -3px 6px rgba(255,255,255,.35); /* leve relevo */
-}
-.pokeName{ margin:0 0 6px; font-size:20px; font-weight:800; }
-.pokeId{ color:#111; }
-.infoPanel dl{ display:grid; grid-template-columns:auto 1fr; gap:6px 10px; margin:0; }
-.infoPanel dt{ font-weight:800; }
-.infoPanel dd{ margin:0; }
-
-/* ===== Controles decorativos ===== */
-.controls{
-  margin-top:8px; display:grid;
-  grid-template-columns:1fr 80px; gap:16px; align-items:center;
-}
-.roundBtn{
-  justify-self:start; width:52px; height:52px; border-radius:50%;
-  background: radial-gradient(circle, #4e545e, #1e222a);
-  box-shadow: inset 0 6px 10px rgba(255,255,255,.1), inset 0 -10px 16px rgba(0,0,0,.35);
-}
-.dpad{ justify-self:end; position:relative; width:84px; height:84px; }
-.dpad .v, .dpad .h{
-  position:absolute; inset:0; margin:auto; background:#20242b; border-radius:10px;
-  box-shadow: inset 0 8px 14px rgba(255,255,255,.06), inset 0 -10px 18px rgba(0,0,0,.45);
-}
-.dpad .v{ width:28px; height:100%; }
-.dpad .h{ height:28px; width:100%; }
-
-
-
-
-
-
-
-/* === Overrides para igualar à referência === */
-:root { color-scheme: light; }
-html, body { background:#fff; }
-
-/* Bezel da tela mais grosso e com relevo */
-.pokedexDevice .screenWrap{
-  position:relative;
-  background:#cfd5df;
-  border:6px solid #9aa3b0;   /* mais grosso */
-  padding:22px;               /* bezel largo */
-  border-radius:16px;
-  display:grid; gap:12px;
-  box-shadow:
-    inset 0 3px 0 rgba(255,255,255,.55),
-    inset 0 -5px 0 rgba(0,0,0,.18);
-}
-
-/* Tela interna */
-.pokedexDevice .screen{
-  background:#fff;
-  border-radius:12px;
-  border:4px solid #aeb4c0;
-  display:grid; place-items:center;
-  aspect-ratio:1/1; overflow:hidden;
-}
-.pokedexDevice .screen img{ width:86%; height:auto; object-fit:contain; }
-
-/* Dois “parafusos” na moldura superior */
-.pokedexDevice .screenDots{
-  position:absolute; top:10px; left:50%;
-  transform:translateX(-50%);
-  display:flex; gap:10px;
-}
-.pokedexDevice .screenDots span{
-  width:10px; height:10px; border-radius:50%;
-  background:#9aa3b0; box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
-}
-
-/* Grelha inferior direita (já existia, só deixamos mais visível) */
-.pokedexDevice .speaker{
-  height:12px; width:88px; margin-left:auto; border-radius:5px;
-  background:repeating-linear-gradient(90deg,#8e96a4 0 6px,#b0b7c3 6px 12px);
-}
-
-/* Botões coloridos mais largos */
-.pokedexDevice .colorBtns{ display:flex; gap:14px; margin:8px 0 6px; }
-.pokedexDevice .btn.flat{ height:14px; width:120px; border-radius:8px;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); }
-.pokedexDevice .btn.yellow{ background:#ffd54f; }
-.pokedexDevice .btn.blue{ background:#64b5f6; }
-
-/* ==== Linha inferior: analógico | info | dpad ==== */
-.pokedexDevice .bottomRow{
+/* ===== Bottom row: analog | info | dpad ===== */
+.bottomRow{
   display:grid;
-  grid-template-columns: 120px 1fr 140px;  /* deixa a telinha mais esticada */
+  grid-template-columns: 120px 1fr 140px;
   align-items:center;
-  gap:22px;
+  gap:18px;
   margin-top:6px;
 }
 
 /* Analógico MAIOR com 3D */
-.pokedexDevice .analogBtn{
+.analogBtn{
   justify-self:start;
   width:86px; height:86px; border-radius:50%;
   background: radial-gradient(circle at 35% 30%, #5a616c 0, #383d46 45%, #21252c 75%, #15181e 100%);
@@ -188,37 +95,48 @@ html, body { background:#fff; }
     0 6px 0 rgba(0,0,0,.35);
 }
 
+/* Telinha VERDE (afundada) */
+.infoPanel{
+  width:100%;
+  max-width: 520px;
+  padding:12px 14px;
+  background:#89bf66;
+  color:#111;
+  border:4px solid #c7cccf;
+  border-radius:18px;
+  box-shadow:
+    inset -8px -8px 12px rgba(0,0,0,.32),
+    inset 8px 8px 12px rgba(255,255,255,.35);
+}
+.pokeName{ margin:0 0 6px; font-size:22px; font-weight:800; }
+.pokeId{ color:#111; }
+.infoPanel dl{ display:grid; grid-template-columns:auto 1fr; gap:8px 12px; margin:0; }
+.infoPanel dt{ font-weight:800; } .infoPanel dd{ margin:0; }
+
 /* D-pad MAIOR */
-.pokedexDevice .dpad{ justify-self:end; position:relative; width:120px; height:120px; }
-.pokedexDevice .dpad .v, .pokedexDevice .dpad .h{
+.dpad{ justify-self:end; position:relative; width:120px; height:120px; }
+.dpad .v, .dpad .h{
   position:absolute; inset:0; margin:auto; background:#20242b; border-radius:12px;
   box-shadow: inset 0 10px 16px rgba(255,255,255,.06), inset 0 -14px 22px rgba(0,0,0,.45);
 }
-.pokedexDevice .dpad .v{ width:38px; height:100%; }
-.pokedexDevice .dpad .h{ height:38px; width:100%; }
+.dpad .v{ width:38px; height:100%; }
+.dpad .h{ height:38px; width:100%; }
 
-/* === Telinha VERDE com efeito “afundado” e texto PRETO === */
-.pokedexDevice .infoPanel{
-  width:100%;
-  max-width: 520px;            /* mais esticada */
-  padding:14px 18px;
-  background:#89bf66;          /* verde claro p/ texto preto */
-  color:#111;                  /* texto preto */
-  border:4px solid #c7cccf;    /* borda cinza clara */
-  border-radius:18px;
-  box-shadow:
-    inset -8px -8px 12px rgba(0,0,0,.32),   /* sombra interna (baixo/dir) */
-    inset 8px 8px 12px rgba(255,255,255,.35); /* brilho interno (cima/esq) */
+/* Overlay que aparece por cima da Pokédex durante o loading/erro */
+.cardOverlay{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  background: rgba(255,255,255,.6);
+  font-weight: 800;
+  color: #111;
+  text-align: center;
+  backdrop-filter: blur(1px);
+  z-index: 6;
 }
-
-/* Tipografia da telinha */
-.pokedexDevice .pokeName{ margin:0 0 6px; font-size:22px; font-weight:800; }
-.pokedexDevice .pokeId{ color:#111; }
-.pokedexDevice .infoPanel dl{
-  display:grid; grid-template-columns:auto 1fr; gap:8px 12px; margin:0;
+.cardOverlay.isError{
+  background: rgba(229,57,53,.12);
+  color: #111;
 }
-.pokedexDevice .infoPanel dt{ font-weight:800; }
-.pokedexDevice .infoPanel dd{ margin:0; }
-
-/* Fundo branco do app (garantia) */
-.app { background:#fff; }

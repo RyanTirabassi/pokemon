@@ -1,59 +1,111 @@
+/* === App.css - layout limpo e previsível === */
+
+:root {
+  --pokedex-width: 560px;
+  --sidecol-width: 420px;
+}
+
+/* Reset / base */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
 body {
-  background: #fff;   /* garante fundo branco total */
   margin: 0;
   padding: 0;
+  background: #fff;
+  color: #111;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* App container */
+.app {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+  min-height: 100vh; /* garante espaço para centralizar verticalmente se precisar */
   display: flex;
+  align-items: flex-start;
   justify-content: center;
 }
 
-.app {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px;
-
-  background: #fff;   /* garante fundo branco do conteúdo */
-  width: 100%;
-  max-width: 1100px;
-  padding: 16px;
-}
+/* Layout: mobile-first (coluna) */
 .layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: start;
-
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;  /* centraliza horizontalmente */
   gap: 24px;
+  align-items: center; /* centraliza itens horizontalmente em mobile */
 }
 
+/* Side column (title + search) - mobile behaviour */
+.sideCol {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center; /* em mobile centraliza horizontally */
+}
+
+/* Device column (a Pokédex) */
+.deviceCol {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  justify-content: center; /* centraliza a pokedex no bloco */
+  align-items: center;
+}
+
+/* Desktop layout: Pokédex à esquerda (largura fixa) e sideCol ao lado
+   com conteúdo verticalmente centrado ao meio da Pokédex */
 @media (min-width: 980px) {
   .layout {
     flex-direction: row;
-    justify-content: center; /* centraliza a Pokédex + busca na tela */
+    align-items: center;        /* IMPORTANT: centraliza verticalmente os blocos */
+    justify-content: center;
     gap: 40px;
+  }
+
+  .deviceCol {
+    width: var(--pokedex-width);
+    max-width: var(--pokedex-width);
+    align-self: center; /* opcional: garante centralização vertical */
+  }
+
+  .sideCol {
+    width: var(--sidecol-width);
+    max-width: var(--sidecol-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* <<< centra verticalmente dentro da coluna */
+    align-items: flex-start;   /* alinha conteúdo da sideCol à esquerda (visual ao lado da pokedex) */
+    gap: 16px;
+  }
+
+  /* Se quiser encontrar um pouco de espaço interno no lado */
+  .sideCol .title {
+    align-self: flex-start;
+  }
+
+  /* Make search bar align-left on desktop (looks like your reference) */
+  .searchBar {
+    align-self: flex-start;
   }
 }
 
+/* Title */
 .title {
   font-size: clamp(28px, 4vw, 56px);
-  margin: 0 0 10px;
+  margin: 0;
   color: #e74a45;
   font-weight: 800;
   letter-spacing: .5px;
 }
 
-
-/* Em telas grandes, Pokédex à esquerda e busca à direita  */
-@media (min-width: 980px) {
-  .layout {
-    grid-template-columns: 560px 1fr;
-    gap: 40px;
-  }
-}
-
-/* ===== SearchBar ===== */
+/* ===== SearchBar (mantive as regras que você já tinha) ===== */
 .searchBar {
   display: flex;
   gap: 8px;
@@ -84,15 +136,7 @@ body {
 }
 .searchBar button:hover { background: #d8eeff; }
 
-/* Acessibilidade (rótulo invisível) */
-.sr-only {
-  position: absolute !important;
-  clip: rect(1px,1px,1px,1px);
-  width: 1px; height: 1px; overflow: hidden;
-  white-space: nowrap; border: 0; padding: 0; margin: -1px;
-}
-
-/* Estados */
+/* Status, footer and small helpers preserved */
 .status {
   background: #1b2030;
   color: #fff;
@@ -101,280 +145,17 @@ body {
 }
 .status.error { background: #3b1c1e; color: #ffd7db; }
 
-/* ===== Pokédex (carcaça) ===== */
-.pokedexDevice {
-  position: relative;
-  background: #e53935;                   /* vermelho pokédex */
-  border: 4px solid #b71c1c;
-  border-radius: 22px;
-  padding: 18px 16px 16px;
-  box-shadow: 10px 8px 0 rgba(0,0,0,.65);
-  max-width: 560px;
-  margin: 0 auto;
+.footer {
+  text-align: left;
+  color: #555;
+  margin-top: 16px;
 }
-/* “Sombra” lateral preta como na imagem */
-.pokedexDevice::after {
-  content: "";
-  position: absolute;
-  top: 8px; right: -10px; bottom: 8px;
-  width: 10px;
-  background: #000;
-  border-radius: 0 16px 16px 0;
-  opacity: .85;
+.sr-only {
+  position: absolute !important;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px; height: 1px; overflow: hidden;
+  white-space: nowrap; border: 0; padding: 0; margin: -1px;
 }
-
-/* Topo com luzes */
-.topBar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.lens {
-  width: 62px; height: 62px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #b7f1ff, #74e0ff 40%, #29b6f6 60%, #0d5c86 100%);
-  box-shadow: inset 0 0 0 4px #e6f6ff, 0 2px 6px rgba(0,0,0,.25);
-}
-.dot {
-  width: 16px; height: 16px; border-radius: 50%;
-  box-shadow: inset 0 0 0 2px rgba(0,0,0,.25);
-}
-.dot.red { background: #ef5350; }
-.dot.yellow { background: #ffd54f; }
-.dot.green { background: #66bb6a; }
-
-/* Tela */
-.screenWrap {
-  background: #c7ccd6;
-  border-radius: 12px;
-  padding: 14px;
-  display: grid;
-  gap: 10px;
-}
-.screen {
-  background: #fff;
-  border-radius: 6px;
-  border: 2px solid #aeb4c0;
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-}
-.screen img {
-  width: 78%;
-  height: auto;
-  object-fit: contain;
-}
-/* Alto-falante */
-.speaker {
-  height: 10px;
-  width: 70px;
-  margin-left: auto;
-  border-radius: 4px;
-  background: repeating-linear-gradient(90deg,#8e96a4 0 6px,#b0b7c3 6px 12px);
-}
-
-/* Botões coloridos (de baixo da tela) */
-.colorBtns {
-  display: flex;
-  gap: 12px;
-  margin: 10px 0;
-}
-.btn.flat {
-  display: inline-block;
-  height: 10px; width: 70px; border-radius: 6px;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25);
-}
-.btn.yellow { background: #ffd54f; }
-.btn.blue { background: #64b5f6; }
-
-/* Painel verde de informações */
-.infoPanel {
-  background: #2e7d32;
-  border: 3px solid #1b5e20;
-  border-radius: 10px;
-  padding: 12px 14px;
-  color: #eaf5ea;
-  margin: 8px 0 12px;
-}
-.pokeName {
-  margin: 0 0 4px;
-  font-size: 18px;
-  font-weight: 800;
-}
-.pokeId { color: #ffee58; }
-.infoPanel dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 6px 10px;
-  margin: 0;
-}
-.infoPanel dt { font-weight: 700; }
-.infoPanel dd { margin: 0; }
-
-/* Controles decorativos */
-.controls {
-  margin-top: 8px;
-  display: grid;
-  grid-template-columns: 1fr 80px;
-  gap: 16px;
-  align-items: center;
-}
-.roundBtn {
-  justify-self: start;
-  width: 52px; height: 52px; border-radius: 50%;
-  background: radial-gradient(circle, #4e545e, #1e222a);
-  box-shadow: inset 0 6px 10px rgba(255,255,255,.1),
-              inset 0 -10px 16px rgba(0,0,0,.35);
-}
-.dpad {
-  justify-self: end;
-  position: relative;
-  width: 84px; height: 84px;
-}
-.dpad .v, .dpad .h {
-  position: absolute; inset: 0;
-  margin: auto; background: #20242b; border-radius: 10px;
-  box-shadow: inset 0 8px 14px rgba(255,255,255,.06),
-              inset 0 -10px 18px rgba(0,0,0,.45);
-}
-.dpad .v { width: 28px; height: 100%; }
-.dpad .h { height: 28px; width: 100%; }
-
-
-
-
-
-
-
-
-
-/* ===== (0) Fundo branco global ===== */
-html, body {
-  background: #fff;
-  color: #111;
-}
-
-/* ===== (1) Tela da IMAGEM: borda mais grossa + botões internos ===== */
-/* Aumenta a borda/bezel e adiciona botões (círculos) dentro do aro */
-.screenWrap {
-  position: relative;                  /* preciso p/ os pseudo-elementos */
-  background: #d0d6e1;                 /* cinza mais claro, visual de bezel */
-  border: 4px solid #9aa3b0;           /* borda mais grossa */
-  padding: 18px;                        /* bezel mais largo */
-  border-radius: 14px;
-  box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.55),
-    inset 0 -3px 0 rgba(0,0,0,.12);
-}
-
-/* botõezinhos dentro do bezel (3 círculos no canto superior direito) */
-.screenWrap::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  right: 16px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #9aa3b0;
-  box-shadow:
-    -16px 0 0 #9aa3b0,
-    -32px 0 0 #9aa3b0; /* cria 3 bolinhas */
-}
-
-/* Tela branca com borda mais visível */
-.screen {
-  background: #fff;
-  border-radius: 10px;
-  border: 3px solid #9aa3b0;          /* borda da tela mais marcada */
-  display: grid;
-  place-items: center;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-}
-
-/* A imagem ocupa um pouco mais da tela */
-.screen img {
-  width: 86%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* ===== (2) Telinha verde de informações: menor e central ===== */
-.infoPanel {
-  width: 280px;                        /* deixa a telinha "menor" */
-  max-width: 90%;
-  margin: 14px auto 12px;              /* centraliza */
-  text-align: left;                    /* rótulos à esquerda,  */
-  background: #2e7d32;
-  border: 3px solid #1b5e20;
-  border-radius: 10px;
-  padding: 12px 14px;
-  color: #eaf5ea;
-}
-
-.pokeName {
-  margin: 0 0 4px;
-  font-size: 18px;
-  font-weight: 800;
-}
-
-.pokeId { color: #ffee58; }
-
-.infoPanel dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 6px 10px;
-  margin: 0;
-}
-
-/* ===== (3) Botões decorativos (amarelo e azul) centralizados logo abaixo da tela ===== */
-.colorBtns {
-  display: flex;
-  justify-content: center;             /* centraliza a fileira */
-  gap: 12px;
-  margin: 10px 0;
-}
-
-.btn.flat {
-  height: 12px;
-  width: 90px;                         /* um pouco mais largos, como na imagem */
-  border-radius: 6px;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25);
-}
-
-/* ===== (4) Controles inferiores: mantêm posição/espaço como na imagem ===== */
-.controls {
-  margin-top: 12px;                    /* pequeno ajuste de respiro */
-  display: grid;
-  grid-template-columns: 1fr 80px;
-  gap: 16px;
-  align-items: center;
-}
-
-/* (decorativos, já existiam) */
-.roundBtn {
-  justify-self: start;
-  width: 52px; height: 52px; border-radius: 50%;
-  background: radial-gradient(circle, #4e545e, #1e222a);
-  box-shadow: inset 0 6px 10px rgba(255,255,255,.1),
-              inset 0 -10px 16px rgba(0,0,0,.35);
-}
-.dpad {
-  justify-self: end;
-  position: relative;
-  width: 84px; height: 84px;
-}
-.dpad .v, .dpad .h {
-  position: absolute; inset: 0;
-  margin: auto; background: #20242b; border-radius: 10px;
-  box-shadow: inset 0 8px 14px rgba(255,255,255,.06),
-              inset 0 -10px 18px rgba(0,0,0,.45);
-}
-.dpad .v { width: 28px; height: 100%; }
-.dpad .h { height: 28px; width: 100%; }
 
 
 
