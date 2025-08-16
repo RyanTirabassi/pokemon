@@ -1,6 +1,22 @@
+body {
+  background: #fff;   /* garante fundo branco total */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
 .app {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 16px;
+
+  background: #fff;   /* garante fundo branco do conteúdo */
+  width: 100%;
+  max-width: 1100px;
   padding: 16px;
 }
 .layout {
@@ -8,7 +24,21 @@
   grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* centraliza horizontalmente */
+  gap: 24px;
 }
+
+@media (min-width: 980px) {
+  .layout {
+    flex-direction: row;
+    justify-content: center; /* centraliza a Pokédex + busca na tela */
+    gap: 40px;
+  }
+}
+
 .title {
   font-size: clamp(28px, 4vw, 56px);
   margin: 0 0 10px;
@@ -258,7 +288,7 @@ html, body {
   background: #9aa3b0;
   box-shadow:
     -16px 0 0 #9aa3b0,
-    -32px 0 0 #9aa3b0; /* cria 3 bolinhas com shadow */
+    -32px 0 0 #9aa3b0; /* cria 3 bolinhas */
 }
 
 /* Tela branca com borda mais visível */
@@ -272,7 +302,7 @@ html, body {
   overflow: hidden;
 }
 
-/* A imagem ocupa um pouco mais da tela agora */
+/* A imagem ocupa um pouco mais da tela */
 .screen img {
   width: 86%;
   height: auto;
@@ -284,7 +314,7 @@ html, body {
   width: 280px;                        /* deixa a telinha "menor" */
   max-width: 90%;
   margin: 14px auto 12px;              /* centraliza */
-  text-align: left;                    /* rótulos à esquerda, como na referência */
+  text-align: left;                    /* rótulos à esquerda,  */
   background: #2e7d32;
   border: 3px solid #1b5e20;
   border-radius: 10px;
@@ -352,3 +382,8 @@ html, body {
 }
 .dpad .v { width: 28px; height: 100%; }
 .dpad .h { height: 28px; width: 100%; }
+
+
+
+
+

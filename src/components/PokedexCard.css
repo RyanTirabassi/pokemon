@@ -1,28 +1,224 @@
-.pokemon-card {
-  background: #f4f4f4;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  width: 300px;
-  padding: 20px;
-  margin: auto;
-  text-align: center;
+/* ===== Carcaça da Pokédex ===== */
+.pokedexDevice{
+  position: relative;
+  background:#e53935;
+  border:4px solid #b71c1c;
+  border-radius:22px;
+  padding:18px 16px 16px;
+  box-shadow:10px 8px 0 rgba(0,0,0,.65);
+  width:100%;
+  max-width:560px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.pokedexDevice::after{
+  content:"";
+  position:absolute; top:8px; right:-10px; bottom:8px;
+  width:10px; background:#000; border-radius:0 16px 16px 0; opacity:.85;
 }
 
-.pokemon-image img {
-  width: 150px;
-  height: 150px;
+/* ===== Topo com luzes ===== */
+.topBar{ display:flex; align-items:center; gap:10px; }
+.lens{
+  width:62px; height:62px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #b7f1ff, #74e0ff 40%, #29b6f6 60%, #0d5c86 100%);
+  box-shadow: inset 0 0 0 4px #e6f6ff, 0 2px 6px rgba(0,0,0,.25);
+}
+.dot{ width:16px; height:16px; border-radius:50%; box-shadow:inset 0 0 0 2px rgba(0,0,0,.25); }
+.dot.red{ background:#ef5350; } .dot.yellow{ background:#ffd54f; } .dot.green{ background:#66bb6a; }
+
+/* ===== Tela da imagem – bezel mais grosso + botões dentro do aro ===== */
+.screenWrap{
+  position:relative;
+  background:#d0d6e1;
+  border:4px solid #9aa3b0;
+  padding:20px;                /* bezel largo */
+  border-radius:14px;
+  display:grid; gap:10px;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.55),
+              inset 0 -3px 0 rgba(0,0,0,.12);
+}
+/* Três botões/círculos no bezel superior direito */
+.screenWrap::before{
+  content:"";
+  position:absolute; top:12px; right:18px;
+  width:10px; height:10px; border-radius:50%; background:#9aa3b0;
+  box-shadow:-16px 0 0 #9aa3b0, -32px 0 0 #9aa3b0;
 }
 
-.pokemon-info h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+/* Tela interna */
+.screen{
+  background:#fff;
+  border-radius:10px;
+  border:3px solid #9aa3b0;
+  display:grid; place-items:center;
+  aspect-ratio:1/1;
+  overflow:hidden;
+}
+.screen img{ width:86%; height:auto; object-fit:contain; }
+.screenPlaceholder{
+  width:100%; height:100%;
+  background: repeating-linear-gradient(45deg,#eceff4 0 12px,#e4e9f1 12px 24px);
 }
 
-.pokemon-info span {
-  color: #777;
-  font-size: 1rem;
+/* Alto-falante em barras */
+.speaker{
+  height:10px; width:80px; margin-left:auto; border-radius:4px;
+  background: repeating-linear-gradient(90deg,#8e96a4 0 6px,#b0b7c3 6px 12px);
 }
 
-.pokemon-info p {
-  margin: 4px 0;
+/* ===== Botões coloridos (abaixo da tela) ===== */
+.colorBtns{ display:flex; gap:12px; margin:4px 0 2px; }
+.btn.flat{ display:inline-block; height:12px; width:90px; border-radius:6px; box-shadow:inset 0 -2px 0 rgba(0,0,0,.25); }
+.btn.yellow{ background:#ffd54f; } .btn.blue{ background:#64b5f6; }
+
+/* ===== Telinha VERDE de informações – estilo da imagem da direita ===== */
+.infoPanel{
+  width:280px; max-width:90%;
+  margin:10px auto 8px;              /* centralizada e menor */
+  padding:12px 14px;
+  background:#a3d977;                 /* verde claro */
+  color:#111;                         /* texto preto */
+  border:3px solid #cfd0d2;           /* borda cinza */
+  border-radius:6px;
+  box-shadow: inset 3px 3px 6px rgba(0,0,0,.18),
+              inset -3px -3px 6px rgba(255,255,255,.35); /* leve relevo */
 }
+.pokeName{ margin:0 0 6px; font-size:20px; font-weight:800; }
+.pokeId{ color:#111; }
+.infoPanel dl{ display:grid; grid-template-columns:auto 1fr; gap:6px 10px; margin:0; }
+.infoPanel dt{ font-weight:800; }
+.infoPanel dd{ margin:0; }
+
+/* ===== Controles decorativos ===== */
+.controls{
+  margin-top:8px; display:grid;
+  grid-template-columns:1fr 80px; gap:16px; align-items:center;
+}
+.roundBtn{
+  justify-self:start; width:52px; height:52px; border-radius:50%;
+  background: radial-gradient(circle, #4e545e, #1e222a);
+  box-shadow: inset 0 6px 10px rgba(255,255,255,.1), inset 0 -10px 16px rgba(0,0,0,.35);
+}
+.dpad{ justify-self:end; position:relative; width:84px; height:84px; }
+.dpad .v, .dpad .h{
+  position:absolute; inset:0; margin:auto; background:#20242b; border-radius:10px;
+  box-shadow: inset 0 8px 14px rgba(255,255,255,.06), inset 0 -10px 18px rgba(0,0,0,.45);
+}
+.dpad .v{ width:28px; height:100%; }
+.dpad .h{ height:28px; width:100%; }
+
+
+
+
+
+
+
+/* === Overrides para igualar à referência === */
+:root { color-scheme: light; }
+html, body { background:#fff; }
+
+/* Bezel da tela mais grosso e com relevo */
+.pokedexDevice .screenWrap{
+  position:relative;
+  background:#cfd5df;
+  border:6px solid #9aa3b0;   /* mais grosso */
+  padding:22px;               /* bezel largo */
+  border-radius:16px;
+  display:grid; gap:12px;
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.55),
+    inset 0 -5px 0 rgba(0,0,0,.18);
+}
+
+/* Tela interna */
+.pokedexDevice .screen{
+  background:#fff;
+  border-radius:12px;
+  border:4px solid #aeb4c0;
+  display:grid; place-items:center;
+  aspect-ratio:1/1; overflow:hidden;
+}
+.pokedexDevice .screen img{ width:86%; height:auto; object-fit:contain; }
+
+/* Dois “parafusos” na moldura superior */
+.pokedexDevice .screenDots{
+  position:absolute; top:10px; left:50%;
+  transform:translateX(-50%);
+  display:flex; gap:10px;
+}
+.pokedexDevice .screenDots span{
+  width:10px; height:10px; border-radius:50%;
+  background:#9aa3b0; box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* Grelha inferior direita (já existia, só deixamos mais visível) */
+.pokedexDevice .speaker{
+  height:12px; width:88px; margin-left:auto; border-radius:5px;
+  background:repeating-linear-gradient(90deg,#8e96a4 0 6px,#b0b7c3 6px 12px);
+}
+
+/* Botões coloridos mais largos */
+.pokedexDevice .colorBtns{ display:flex; gap:14px; margin:8px 0 6px; }
+.pokedexDevice .btn.flat{ height:14px; width:120px; border-radius:8px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.25); }
+.pokedexDevice .btn.yellow{ background:#ffd54f; }
+.pokedexDevice .btn.blue{ background:#64b5f6; }
+
+/* ==== Linha inferior: analógico | info | dpad ==== */
+.pokedexDevice .bottomRow{
+  display:grid;
+  grid-template-columns: 120px 1fr 140px;  /* deixa a telinha mais esticada */
+  align-items:center;
+  gap:22px;
+  margin-top:6px;
+}
+
+/* Analógico MAIOR com 3D */
+.pokedexDevice .analogBtn{
+  justify-self:start;
+  width:86px; height:86px; border-radius:50%;
+  background: radial-gradient(circle at 35% 30%, #5a616c 0, #383d46 45%, #21252c 75%, #15181e 100%);
+  box-shadow:
+    inset 0 12px 18px rgba(255,255,255,.08),
+    inset 0 -20px 28px rgba(0,0,0,.45),
+    0 6px 0 rgba(0,0,0,.35);
+}
+
+/* D-pad MAIOR */
+.pokedexDevice .dpad{ justify-self:end; position:relative; width:120px; height:120px; }
+.pokedexDevice .dpad .v, .pokedexDevice .dpad .h{
+  position:absolute; inset:0; margin:auto; background:#20242b; border-radius:12px;
+  box-shadow: inset 0 10px 16px rgba(255,255,255,.06), inset 0 -14px 22px rgba(0,0,0,.45);
+}
+.pokedexDevice .dpad .v{ width:38px; height:100%; }
+.pokedexDevice .dpad .h{ height:38px; width:100%; }
+
+/* === Telinha VERDE com efeito “afundado” e texto PRETO === */
+.pokedexDevice .infoPanel{
+  width:100%;
+  max-width: 520px;            /* mais esticada */
+  padding:14px 18px;
+  background:#89bf66;          /* verde claro p/ texto preto */
+  color:#111;                  /* texto preto */
+  border:4px solid #c7cccf;    /* borda cinza clara */
+  border-radius:18px;
+  box-shadow:
+    inset -8px -8px 12px rgba(0,0,0,.32),   /* sombra interna (baixo/dir) */
+    inset 8px 8px 12px rgba(255,255,255,.35); /* brilho interno (cima/esq) */
+}
+
+/* Tipografia da telinha */
+.pokedexDevice .pokeName{ margin:0 0 6px; font-size:22px; font-weight:800; }
+.pokedexDevice .pokeId{ color:#111; }
+.pokedexDevice .infoPanel dl{
+  display:grid; grid-template-columns:auto 1fr; gap:8px 12px; margin:0;
+}
+.pokedexDevice .infoPanel dt{ font-weight:800; }
+.pokedexDevice .infoPanel dd{ margin:0; }
+
+/* Fundo branco do app (garantia) */
+.app { background:#fff; }
