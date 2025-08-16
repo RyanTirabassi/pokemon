@@ -6,9 +6,6 @@ body {
   justify-content: center;
 }
 
-
-
-
 .app {
   max-width: 1100px;
   margin: 0 auto;
@@ -46,11 +43,7 @@ body {
   font-weight: 800;
   letter-spacing: .5px;
 }
-.footer {
-  text-align: left;
-  color: #cfd3e0;
-  margin-top: 16px;
-}
+
 
 /* Em telas grandes, Pokédex à esquerda e busca à direita  */
 @media (min-width: 980px) {
